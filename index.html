@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Moon Night </title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
+    <script src="suncalc.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <div class="logo_item">
+        <i class="bx bx-menu" id="sidebarOpen"></i>
+        </i>Make Your Map
+      </div>
+      <div class="navbar_content">
+        <i class="bi bi-grid"></i>
+        <i class='bx bx-sun' id="darkLight"></i>
+      </div>
+    </nav>
+    <!-- sidebar -->
+    <nav class="sidebar">
+      <div class="menu_content">
+        <ul class="menu_items">
+          <div class="menu_title menu_dahsboard"></div>
+          <!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
+          <!-- start -->
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class="bx bx-map"></i>
+              </span>
+              <span class="navlink">Place & Time</span>
+              <i class="bx bx-chevron-right arrow-left"></i>
+            </div>
+            <ul class="menu_items submenu">
+              <div class="tabcontent">
+                <p class="search text-lg font-semibold mb-4" style="color: #007bff; font-size: smaller;">
+                  <i class="fas fa-search mr-2" style="color: #007bff;"></i> Where do you want to see the Moon from?
+                </p>
+                <div class="input-with-icon">
+                  <input id='textinput' type="text" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500 w-full text-sm" placeholder="Search a city" style="font-size: 13px;">
+                  <i class="icon fas fa-map-marker-alt"></i>
+                  <!-- Map marker icon -->
+                </div>
+                <!-- Suggestion container -->
+                <div class="suggestion-container" id="suggestionContainer"></div>
+                <p class="search text-lg font-semibold mb-4" style="color: #007bff; font-size: smaller; padding-top: 18px;">
+                  <i class="fas fa-calendar-alt mr-2" style="color: #007bff;"></i> When did your event take place?
+                </p>
+                <div class="search-container">
+                  <input type="date" id="searchinput1" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500 w-full text-sm" placeholder="Select a date" style="font-size: 13px;">
+                  <!-- You can add a button here for search if needed -->
+                </div>
+                <p class="search text-lg font-semibold mb-4" style="color: #007bff; font-size: smaller; padding-top: 18px;">
+                  <i class="far fa-clock mr-2" style="color: #007bff;"></i> At what time?
+                </p>
+                <div class="search-container">
+                  <div class="flex items-center space-x-4">
+                    <!-- Hour input box -->
+                    <input type="text" id="hourInput" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500 w-16 text-center text-sm" placeholder="24">
+                    <!-- Colon separator -->
+                    <span class="text-lg font-semibold">:</span>
+                    <!-- Minute input box -->
+                    <input type="text" id="minuteInput" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500 w-16 text-center text-sm" placeholder="00">
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </li>
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class="bx bx-palette"></i>
+                <!-- Using bx-palette icon for Theme -->
+              </span>
+              <span class="navlink">Theme</span>
+              <i class="bx bx-chevron-right arrow-left"></i>
+            </div>
+            <ul class="menu_items submenu">
+              <div class="tabcontent">
+                <p class="search text-base font-semibold mb-4">
+                  <i class="fas fa-palette mr-2" style="color: #ff5733;"></i> Style
+                </p>
+                <div class="wrapper">
+                  <!-- Shape containers with different backgrounds -->
+                  <div class="themebox shape-container bg-black" data-value="theme1.jpg"></div>
+                  <!-- Black background -->
+                  <div class="themebox shape-container bg-moon2" data-value="theme2.jpg"></div>
+                  <!-- Background image moonstyle2.jpg -->
+                  <div class="themebox shape-container bg-moon3" data-value="theme3.jpg"></div>
+                  <!-- Background image moonstyle3.jpg -->
+                  <div class="themebox shape-container bg-moon4" data-value="theme4.jpg"></div>
+                  <!-- Background image moonstyle4.jpg -->
+                  <div class="themebox shape-container bg-gray-900" data-value="theme5.jpg"></div>
+                  <!-- Background color #33363d -->
+                  <div class="themebox shape-container bg-moon5" data-value="theme6.jpg"></div>
+                  <!-- Background image moonstyle5.jpg -->
+                </div>
+              </div>
+            </ul>
+          </li>
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class="bx bx-font"></i>
+                <!-- Using bx-font icon for Text -->
+              </span>
+              <span class="navlink">Text (Optional)</span>
+              <i class="bx bx-chevron-right arrow-left"></i>
+            </div>
+            <ul class="menu_items submenu">
+              <div class="tabcontent1">
+                <textarea id="opt-text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500 text-sm" rows="4"></textarea>
+                <div class="mt-3">
+                  <p class="search text-base font-semibold mb-4"> Font </p>
+                  <select id="fontSelect" name="fontSelect" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500 text-sm" onchange="changeFont()">
+                    <option value="Arial" style="font-family: Arial;">Arial</option>
+                    <option value="Helvetica" style="font-family: Helvetica;">Helvetica</option>
+                    <option value="Nunito" style="font-family: 'Nunito', sans-serif;">Nunito</option>
+                    <option value="Roboto" style="font-family: Roboto;">Roboto</option>
+                  </select>
+                  <div class="font-size-container">
+                    <p class="search text-base font-semibold mb-4"> Font Size </p>
+                  </div>
+                  <input type="number" id="fontSizeInput" name="fontSizeInput" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500 text-sm" placeholder="Enter font size" min="8" max="72">
+                </div>
+              </div>
+            </ul>
+          </li>
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class="bx bx-cog"></i>
+                <!-- Gear icon for Advanced Settings -->
+              </span>
+              <span class="navlink">Advanced</span>
+              <i class="bx bx-chevron-right arrow-left"></i>
+            </div>
+            <ul class="menu_items submenu">
+              <div class="tabcontent">
+                <p class="search text-base font-semibold mb-4">Date Text</p>
+                <input id="textinput-new" type="text" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500 w-full text-sm" placeholder="April 24, 2024" style="font-size: 13px;">
+                <!-- Toggle Switch -->
+                <div class="flex items-center mt-3" style="padding-top: 0.5rem;">
+                  <input id="toggleSwitch" type="checkbox" class="hidden" />
+                  <label for="toggleSwitch" class="toggle-label">
+                    <span class="toggle-button"></span>
+                  </label>
+                  <div class="button-text">
+                    <span class="text-xs" style="font-size: 14px;">Show the time</span>
+                  </div>
+                </div>
+                <div class="text-pad">
+                  <p class="search text-base font-semibold mb-4">Place Text</p>
+                  <input id="textinput10" type="text" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500 w-full text-sm" placeholder="" style="font-size: 13px;">
+                </div>
+                <!-- Toggle Switch -->
+                <div class="flex items-center mt-3" style="padding-top: 0.5rem;">
+                  <input id="Gps_toggleSwitch" type="checkbox" class="hidden" />
+                  <label for="Gps_toggleSwitch" class="toggle-label">
+                    <span class="toggle-button"></span>
+                  </label>
+                  <div class="button-text">
+                    <span class="text-xs" style="font-size: 14px;">Show GPS</span>
+                  </div>
+                </div>
+                <!-- Toggle Switch -->
+                <div class="flex items-center mt-3" style="padding-top: 0.5rem;">
+                  <input id="Lunar_toggleSwitch" type="checkbox" class="hidden" />
+                  <label for="Lunar_toggleSwitch" class="toggle-label">
+                    <span class="toggle-button"></span>
+                  </label>
+                  <div class="button-text">
+                    <span class="text-xs" style="font-size: 14px;">Show Lunar phase </span>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <p class="search text-base font-semibold mb-4"> Font </p>
+                  <select id="fontSelect1" name="fontSelect" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500 text-sm">
+                    <option value="Arial" style="font-family: Arial;">Arial</option>
+                    <option value="Helvetica" style="font-family: Helvetica;">Helvetica</option>
+                    <option value="Nunito" style="font-family: 'Nunito', sans-serif;">Nunito</option>
+                    <option value="Roboto" style="font-family: Roboto;">Roboto</option>
+                    <!-- Add more font options as needed -->
+                  </select>
+                  <div class="font-size-container">
+                    <p class="search text-base font-semibold mb-4"> Font Size </p>
+                  </div>
+                  <input type="number" id="fontSizeInput1" name="fontSizeInput" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500 text-sm" placeholder="Enter font size" min="8" max="72">
+                </div>
+            </ul>
+          </li>
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class="bx bx-font-size"></i>
+                <!-- Using bx-font-size icon for Font and Size -->
+              </span>
+              <span class="navlink">Format and Size</span>
+              <i class="bx bx-chevron-right arrow-left"></i>
+            </div>
+            <ul class="menu_items submenu">
+              <div class="tabcontent">
+                <p class="search text-base font-semibold mb-4"> Format </p>
+                <div class="container">
+                  <div class="option1">
+                    <div class="formatcontainer" onclick="showPrintedContent()">
+                      <img src="printed.jpg" alt="Printed Poster">
+                    </div>
+                    <div class="textformat">
+                      <h2>Printed <br>poster </h2>
+                    </div>
+                  </div>
+                  <div class="option2">
+                    <div class="formatcontainer" onclick="showDigitalContent()">
+                      <img src="digital-file.svg" alt="Digital File SVG">
+                    </div>
+                    <div class="textformat">
+                      <h2>Digital File</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="printed-poster-content">
+                  <p class="text-sm font-semibold text-gray-800 mb-2"> Size </p>
+                  <div class="box-container">
+                    <div class="boxposter boxposter1" onclick="selectBox(1)">
+                      <div class="preview-container">
+                        <div class="size-preview"></div>
+                      </div>
+                      <div class="text-container">
+                        <p class="size-text">21x30cm</p>
+                        <p class="size-text">8x12'</p>
+                      </div>
+                    </div>
+                    <div class="boxposter boxposter2" onclick="selectBox(2)">
+                      <div class="preview-container">
+                        <div class="size-preview1"></div>
+                      </div>
+                      <div class="text-container">
+                        <p class="size-text">30x40cm</p>
+                        <p class="size-text">12x16'</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="digital-file-content" style="display: none;">
+                  <p class="text-sm font-semibold text-gray-800 mb-2"> Size </p>
+                  <div class="boxposter">
+                    <div class="preview-container">
+                      <div class="size-preview">
+                        <p class="preview-text">PDF</p>
+                      </div>
+                    </div>
+                    <div class="text-container">
+                      <p class="size-text">21x30cm</p>
+                      <p class="size-text">8x12'</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </li>
+       
+        </ul>
+     
+        <div class="bottom_content">
+          <div class="bottom expand_sidebar">
+            <span> Expand</span>
+            <i class='bx bx-log-in'></i>
+          </div>
+          <div class="bottom collapse_sidebar">
+            <span> Collapse</span>
+            <i class='bx bx-log-out'></i>
+          </div>  
+        </div>
+      </div>
+    </nav>
+    <div class="map-outer-frame">
+      <div class="shadowimage"></div>
+      <canvas id="moonCanvas"></canvas>
+      <div class="credits-label">
+        <a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a>
+        <a href="http://www.openstreetmap.org/about/" target="_blank">© OpenStreetMap</a>
+        <a href="https://www.mapbox.com/map-feedback/" target="_blank" class="ng-binding">Improve this map</a>
+
+     
+    </div>
+
+  </div>
+  <div style="position: absolute; top: 50%;left: 20% ;">
+  <button id="downloadImageBtn" >Download Image</button>
+  <br>
+  
+
+<select id="sizeSelect">
+    <option value="A4">A4</option>
+    <option value="A3">A3</option>
+    <option value="A2">A2</option>
+</select>
+</div>
+    <script src="script.js"></script>
+  </body>
+</html>

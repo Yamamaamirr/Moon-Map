@@ -1,0 +1,796 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+:root {
+  --white-color: #fff;
+  --blue-color: #4070f4;
+  --grey-color: #707070;
+  --grey-color-light: #aaa;
+}
+
+body {
+  background-image: linear-gradient(to right, #faf9f9, #fffbfb); /* Lighter grey on the left (#f5f5f5) transitioning to darker grey on the right (#dddddd) */
+  transition: all 0.5s ease;
+
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.dark {
+  background-color: #333;
+}
+body.dark {
+  --white-color: #333;
+  --blue-color: #fff;
+  --grey-color: #f2f2f2;
+  --grey-color-light: #aaa;
+}
+
+/* navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  background-color: var(--white-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  z-index: 1000;
+  box-shadow: 0 0 2px var(--grey-color-light);
+}
+.logo_item {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--blue-color);
+}
+.navbar img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+.search_bar {
+  height: 47px;
+  max-width: 430px;
+  width: 100%;
+}
+.search_bar input {
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  font-size: 18px;
+  outline: none;
+  background-color: var(--white-color);
+  color: var(--grey-color);
+  border: 1px solid var(--grey-color-light);
+  padding: 0 20px;
+}
+.navbar_content {
+  display: flex;
+  align-items: center;
+  column-gap: 25px;
+}
+.navbar_content i {
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--grey-color);
+}
+
+
+/* Position the flower image */
+.flower-image {
+  position: absolute;
+  top: calc(50% + 80px); /* Position the flower image 40px below the center of the parent */
+  left: calc(50% + 250px); /* Position the flower image 200px to the right of the map container */
+
+  width: 160px; /* Adjust width of the flower image container */
+  height: 240px; /* Adjust height of the flower image container */
+  background-image: url('flowers.png'); /* Specify the path to your flower image */
+  background-size: cover; /* Ensure the image covers the container */
+  z-index: 3; /* Ensure flower image is in front of shadow and behind map container */
+}
+/* Centering the map container */
+
+
+
+
+
+.map-box-attribute {
+  position: absolute;
+margin-right: 100%;
+margin-top: 20%;
+
+}
+
+/* sidebar */
+.sidebar {
+  background-color: var(--white-color);
+  width: 260px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 80px 20px;
+  z-index: 100;
+  overflow-y: scroll;
+  box-shadow: 0 0 1px var(--grey-color-light);
+  transition: all 0.5s ease;
+}
+  
+  .sidebar.close {
+ 
+    width: 80px; /* Adjusted width when sidebar is closed */
+  }
+  
+ 
+  /* Hide scrollbar */
+  .sidebar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar.close .menu_title {
+    padding: 6px 30px;
+  }
+
+  .menu_content {
+    position: relative;
+    left: -29px; /* Adjust this value to move menu content towards the left */
+  }
+.menu_title {
+  margin: 15px 0;
+  padding: 0 20px;
+  font-size: 18px;
+}
+
+.menu_title::before {
+  color: var(--grey-color);
+  white-space: nowrap;
+}
+.menu_dahsboard::before {
+  content: "";
+}
+.menu_editor::before {
+  content: "Editor";
+}
+.menu_setting::before {
+  content: "Setting";
+}
+.sidebar.close .menu_title::before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 18px;
+  border-radius: 12px;
+  background: var(--grey-color-light);
+}
+.menu_items {
+  padding: 0;
+  list-style: none;
+}
+.navlink_icon {
+  position: relative;
+  font-size: 22px;
+  min-width: 50px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 6px;
+}
+.navlink_icon::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: calc(100% + 100px);
+  left: -20px;
+}
+.navlink_icon:hover {
+  background: var(--blue-color);
+}
+.sidebar .nav_link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 4px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--grey-color);
+  white-space: nowrap;
+}
+.sidebar.close .navlink {
+  display: none;
+}
+.nav_link:hover {
+  color: var(--white-color);
+  background: var(--blue-color);
+}
+.sidebar.close .nav_link:hover {
+  background: var(--white-color);
+}
+.submenu_item {
+  cursor: pointer;
+}
+.submenu {
+  display: none;
+}
+.submenu_item .arrow-left {
+  position: absolute;
+  right: 10px;
+  display: inline-block;
+  margin-right: auto;
+}
+.sidebar.close .submenu {
+  display: none;
+}
+.show_submenu ~ .submenu {
+  display: block;
+}
+.show_submenu .arrow-left {
+  transform: rotate(90deg);
+}
+.submenu .sublink {
+  padding: 15px 15px 15px 52px;
+}
+.bottom_content {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  width: 260px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.bottom {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 0;
+  justify-content: space-around;
+  padding: 18px 0;
+  text-align: center;
+  width: 100%;
+  color: var(--grey-color);
+  border-top: 1px solid var(--grey-color-light);
+  background-color: var(--white-color);
+}
+.bottom i {
+  font-size: 20px;
+}
+.bottom span {
+  font-size: 18px;
+}
+.sidebar.close .bottom_content {
+  width: 50px;
+  left: 15px;
+}
+.sidebar.close .bottom span {
+  display: none;
+}
+.sidebar.hoverable .collapse_sidebar {
+  display: none;
+}
+#sidebarOpen {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  #sidebarOpen {
+    font-size: 25px;
+    display: block;
+    margin-right: 10px;
+    cursor: pointer;
+    color: var(--grey-color);
+  }
+  .sidebar.close {
+    left: -100%;
+  }
+  .search_bar {
+    display: none;
+  }
+  .sidebar.close .bottom_content {
+    left: -100%;
+  }
+  
+}
+
+.tabcontent {
+    padding-top: 30px; /* Add top padding to create space */
+    padding-bottom: 30px;
+    margin-left: 35px; /* Adjust left margin to move it towards the right */
+   
+  }
+
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    padding-top: 2px;
+  }
+  .search-input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+  }
+  .placetext{
+
+    padding-top: 30px;
+
+   font-size: 13px;
+   color: rgb(93, 89, 89);
+  }
+
+
+ 
+  .mapshapecontainer{
+    padding-top: 20px;
+  }
+
+  /* Shape container styles */
+  .shape-container {
+    display: inline-block;
+    padding: 4px;
+    border: 1px solid #828080;
+    border-radius: 0;
+    width: 58px;
+    height: 58px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Background color classes */
+  .bg-black {
+    background-image: url('theme1.jpg');
+    background-size: cover;
+  }
+
+  .bg-moon2 {
+    background-image: url('theme2.jpg');
+    background-size: cover;
+  }
+
+  .bg-moon3 {
+    background-image: url('theme3.jpg');
+    background-size: cover;
+  }
+
+  .bg-moon4 {
+    background-image: url('theme4.jpg');
+    background-size: cover;
+  }
+
+  .bg-gray-900 {
+    background-image: url('theme5.jpg');
+    background-size: cover;
+  }
+
+  .bg-moon5 {
+    background-image: url('theme6.jpg');
+    background-size: cover;
+  }
+
+  .bg-white {
+    background-image: url('theme7.jpg');
+    background-size: cover;
+  }
+.shape-container:hover {
+    border-color: #ff1616; /* Change background color on hover */
+}
+
+
+.markershape{
+
+    padding-top: 10px;
+}
+.wrapper{
+    padding-top: 10px;
+}
+
+.wrapper1 {
+    display: flex; /* Use flexbox to align items */
+    padding-top: 10px;
+}
+
+
+
+.box {
+    width: 25px; /* Set width of the boxes */
+    height: 25px; /* Set height of the boxes */
+    margin-right: 10px; /* Add spacing between the boxes */
+}
+
+.box1 {
+  background-color: red; /* Set background color of box2 to red */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+
+.box2 {
+    background-color: black; /* Set background color of box2 to red */
+    cursor: pointer; /* Change cursor to pointer */
+}
+.inputcontainer{
+padding-top: 14px;
+}
+
+.tabcontent1 {
+  padding-top: 10px; /* Add top padding to create space */
+  padding-bottom: 30px;
+  margin-left: 35px; /* Adjust left margin to move it towards the right */
+ 
+}
+.input-with-icon {
+  position: relative;
+  border-radius: 8px; /* Rounded corners for the input container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+}
+
+.input-with-icon input {
+  padding-right: 30px; /* Adjust padding to make space for the icon */
+}
+
+.input-with-icon .icon {
+  position: absolute;
+  top: 50%; /* Position vertically centered */
+  right: 10px; /* Adjust as needed to position horizontally */
+  transform: translateY(-50%);
+  color: #ccc; /* Color of the icon */
+}
+
+
+
+.formatcontainer {
+  width:60px; /* Set fixed width for the container */
+  margin-right: auto; /* Auto margin on the left side to push container to the right */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden; /* Ensures content does not overflow */
+}
+
+.formatcontainer img {
+  display: block; /* Ensure image is a block element */
+  width: 100%; /* Set image width to fill its container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.textformat {
+ padding: 3px;
+}
+
+.textformat h2 {
+  font-size: 13px; /* Set font size for the heading */
+  display: inline-block; /* Display the heading as inline block */
+}
+
+.container {
+  display: flex;
+  justify-content: space-between; /* Adjust spacing between items */
+}
+
+.option1, .option2 {
+  flex: 1; /* Equal width for both items */
+  margin-right: 5px; /* Reduce spacing between items */
+}
+
+
+.printed-poster-content{
+  padding-top: 20px;
+}
+
+
+.digital-file-content{
+  padding-top: 20px;
+}
+
+
+.mapboxgl-ctrl-logo {
+ display: none !important;
+ }
+
+    #button-container {
+      text-align: center;
+      margin-top: 10px;
+  position: absolute;
+  top: 90%;
+  left: 60%;
+  transform: translate(-50%, -50%);  }	
+
+
+  .formatcontainer {
+    cursor: pointer; /* Set cursor to pointer */
+}
+
+.box-container {
+  display: flex; /* Use flexbox for layout */
+}
+
+.boxposter {
+  width: 100px; /* Set width of each box */
+  height: 100px; /* Set height of each box */
+  border: 1px solid rgb(234, 231, 231); /* Add light gray border */
+  margin-right: 10px; /* Add spacing between boxes */
+  position: relative; /* Enable positioning of child elements */
+  display: flex; /* Use flexbox to align content */
+  flex-direction: column; /* Stack child elements vertically */
+  justify-content: flex-start; /* Align child elements to the start */
+  align-items: center; /* Center child elements horizontally */
+  cursor: pointer; /* Default cursor style */
+  transition: background-color 0.3s ease;
+}
+
+
+.boxposter:hover {
+  background-color: #efeaea;
+}
+
+.boxposter:last-child {
+  margin-right: 0;
+}
+
+.size-preview {
+  width: 30px; /* Set width of size preview box */
+  height: 35px; /* Set height of size preview box */
+  background-color: lightgray; /* Light gray background */
+  margin-top: 12px; /* Adjust top margin for size preview */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+  display: flex; /* Use flexbox to center content */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding: 8px; /* Add padding inside the preview box */
+}
+
+.size-text {
+  text-align: center; /* Center text */
+  font-size: 11px; /* Adjust font size */
+  margin-top: 6px; /* Adjust top margin for text */
+}
+
+.text-container {
+  padding: 5px; /* Add padding around text container */
+}
+
+.size-preview1 {
+  width: 30px; 
+  height: 40px; 
+  background-color: lightgray; 
+  margin-top: 8px; /* Adjust top margin for size preview */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+  display: flex; /* Use flexbox to center content */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding: 6px; /* Add padding inside the preview box */
+}
+
+.preview-text {
+  text-transform: uppercase; /* Convert text to uppercase */
+  font-weight: bold; /* Make text bold */
+  color: white; /* Set text color to white */
+  font-size: 12px; /* Adjust font size as needed */
+}
+
+
+@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/greatvibes/v9/RWmMoKWR9v4ksMfaWd_JN-XC.ttf) format('truetype');
+}
+
+
+.ovo-regular {
+  font-family: "Ovo", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.marker {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+
+ /* Define global font styles for the suggestions container */
+ #suggestions-container .text-base {
+  font-family: 'Roboto', sans-serif;
+  /* Use any desired font family */
+}
+
+/* Individual suggestion item styles */
+#suggestions-container .suggestion {
+  font-size: 16px;
+  line-height: 1.5;
+  /* Add more specific font styles if needed */
+}
+
+.mapboxgl-ctrl-top-left {
+  margin-left: 11%; /* Adjust this percentage to shift the control to the right */
+  margin-top: 4%; /* Convert margin-top to percentage (adjust as needed) */
+}
+
+.map-box-attribute {
+  position: relative;
+  width: 100%;
+  text-align: right;
+}
+.mapboxgl-ctrl-attrib {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.credits-label {
+  font-size: 10px;
+}
+.credits-label {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  font-size: 11px;
+  -webkit-transform: rotate(90deg) translateX(50%);
+  transform: rotate(90deg) translateX(50%);
+  -webkit-transform-origin: right center;
+  transform-origin: right center;
+}
+
+.credits-label {
+  color: #808080; /* Light gray color */
+}
+
+.credits-label a {
+  color: #808080; /* Light gray color for anchor links */
+  text-decoration: none; /* Remove underline from anchor links */
+}
+
+
+
+
+.font-size-container{
+  padding-top: 15px;
+}
+/* Toggle Switch Styles */
+.toggle-label {
+  display: inline-block;
+  position: relative;
+  width: 40px; /* Width of the toggle switch */
+  height: 20px; /* Height of the toggle switch */
+  background-color: #ccc;
+  border-radius: 10px; /* Half of the height for rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-button {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 2px; /* Adjust left position for the toggle button */
+  transform: translateY(-50%);
+  width: 16px; /* Diameter of the toggle button */
+  height: 16px; /* Diameter of the toggle button */
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, left 0.3s ease; /* Include 'left' in the transition */
+}
+
+#toggleSwitch:checked + .toggle-label {
+  background-color: #3490dc; /* Change to desired 'on' color */
+}
+
+#toggleSwitch:checked + .toggle-label .toggle-button {
+  left: calc(100% - 18px); /* Position the toggle button to the 'on' state */
+  transition-delay: 0.1s; /* Add a delay to the transition */
+}
+
+.button-text{
+  padding-left: 7px;
+}
+
+.text-pad{
+  padding-top: 15px;
+}
+
+
+#Gps_toggleSwitch:checked + .toggle-label {
+  background-color: #3490dc; /* Change to desired 'on' color */
+}
+
+#Gps_toggleSwitch:checked + .toggle-label .toggle-button {
+  left: calc(100% - 18px); /* Position the toggle button to the 'on' state */
+  transition-delay: 0.1s; /* Add a delay to the transition */
+}
+
+#Lunar_toggleSwitch:checked + .toggle-label {
+  background-color: #3490dc; /* Change to desired 'on' color */
+}
+
+#Lunar_toggleSwitch:checked + .toggle-label .toggle-button {
+  left: calc(100% - 18px); /* Position the toggle button to the 'on' state */
+  transition-delay: 0.1s; /* Add a delay to the transition */
+}
+
+
+
+
+.map-outer-frame {
+  height: 99%;
+  width: 100%;
+  margin-left: 10%;
+  margin-top: 0.125%;
+  box-sizing: border-box;
+  background-image: linear-gradient(to right, #d8d8d8, #f4f4f4);
+  padding: 2.08%;
+  overflow: auto;
+  position: relative;
+}
+
+
+
+canvas {
+  position: absolute;
+  top: 53%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  z-index: 2;
+  box-shadow: 0 8px 20px rgba(5, 5, 5, 0.5);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#moonCanvas {
+  width: 387px;
+   height: 505px;
+}
+
+/* Optional: Define media queries for different screen sizes */
+@media screen and (max-width: 768px) {
+  canvas {
+    width: 90%;
+    height: auto; /* Allow height to adjust according to width */
+  }
+
+  .shadowimage{
+    display: none;
+
+  }
+} 
+
+ /* Style for suggestion container */
+ .suggestion-container {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  position: absolute;
+  width: calc(100% - 6px); /* Adjust for borders */
+  z-index: 1000;
+}
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+  font-size: 12px; /* Smaller font size */
+}
+.suggestion-item:hover {
+  background-color: #f2f2f2;
+}
